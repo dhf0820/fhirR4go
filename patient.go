@@ -119,10 +119,35 @@ type Patient struct {
 	LastAccess      time.Time          `json:"-" bson:"last_access"`
 }
 
+// type PatientBundle struct {
+// 	SearchResult
+// 	Entry []struct {
+// 		FullURL  string  `json:"fullUrl" bson:"full_url"`
+// 		Resource Patient `json:"resource"`
+// 	} `json:"entry"`
+// }
+
 type PatientBundle struct {
+	ResourceType string `bson:"resource_type" json:"resourceType"`
+	Id           string `bson:"id,omitempty" json:"id,omitempty"`
+	Meta         *Meta  `bson:"meta,omitempty" json:"meta,omitempty"`
+	//ImplicitRules *string       `bson:"implicit_rules,omitempty" json:"implicitRules,omitempty"`
+	//Language      *string       `bson:"language,omitempty" json:"language,omitempty"`
+	//Identifier    *Identifier   `bson:"identifier,omitempty" json:"identifier,omitempty"`
+	Type Code `bson:"type" json:"type"` // document | message | transaton | transaction-response | batch | batch_response | history | searchset | collection
+	//Timestamp     *string       `bson:"timestamp,omitempty" json:"timestamp,omitempty"`
+	Total int                  `bson:"total,omitempty" json:"total,omitempty"`
+	Link  []BundleLink         `bson:"link,omitempty" json:"link,omitempty"`
+	Entry []PatientBundleEntry `bson:"entry,omitempty" json:"entry,omitempty"`
+	//Signature     *Signature    `bson:"signature,omitempty" json:"signature,omitempty"`
 	SearchResult
-	Entry []struct {
-		FullURL  string  `json:"fullUrl" bson:"full_url"`
-		Resource Patient `json:"resource"`
-	} `json:"entry"`
+}
+
+type PatientBundleEntry struct {
+	//Link     []BundleLink         `bson:"link,omitempty" json:"link,omitempty"`
+	FullUrl  string               `bson:"fullUrl,omitempty" json:"fullUrl,omitempty"`
+	Resource *Patient             `bson:"resource,omitempty" json:"resource,omitempty"` //patient
+	Search   *BundleEntrySearch   `bson:"search,omitempty" json:"search,omitempty"`
+	Request  *BundleEntryRequest  `bson:"request,omitempty" json:"request,omitempty"`
+	Response *BundleEntryResponse `bson:"response,omitempty" json:"response,omitempty"`
 }
