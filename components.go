@@ -14,6 +14,9 @@ type Address struct {
 	State      string   `json:"state" bson:"state"`
 	PostalCode string   `json:"postalCode" bson:"postal_code"`
 	Country    string   `json:"country" bson:"country"`
+	District   string   `json:"district" bson:"district"`
+	AddrType   string   `json:"type" bson:"addr_type"`
+	Text       string   `json:"text" bson:"text"`
 	Period     Period   `json:"period,omitempty" bson:"period"`
 }
 
