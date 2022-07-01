@@ -1,4 +1,4 @@
-module github.com/dhf0820/fhirR2go
+module github.com/dhf0820/fhirR4go
 
 go 1.17
 
