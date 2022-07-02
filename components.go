@@ -142,10 +142,10 @@ type Contact struct {
 	Name
 }
 
-// Context encounter only initially
-type Context struct {
-	EncounterRef EncounterReference `json:"encounter"`
-}
+// // Context encounter only initially
+// type Context struct {
+// 	EncounterRef EncounterReference `json:"encounter"`
+// }
 
 // Concept is a general concept such as language
 

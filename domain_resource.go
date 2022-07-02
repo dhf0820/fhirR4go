@@ -75,7 +75,7 @@ type documentReference DocumentReference
 
 type DocumentReferenceContextComponent struct {
 	BackboneElement   `bson:",inline"`
-	Encounter         *Reference                                 `bson:"encounter,omitempty" json:"encounter,omitempty"`
+	Encounter         []Reference                                `bson:"encounter,omitempty" json:"encounter,omitempty"`
 	Event             []CodeableConcept                          `bson:"event,omitempty" json:"event,omitempty"`
 	Period            *Period                                    `bson:"period,omitempty" json:"period,omitempty"`
 	FacilityType      *CodeableConcept                           `bson:"facilityType,omitempty" json:"facilityType,omitempty"`

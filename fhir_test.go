@@ -19,10 +19,10 @@ import (
 //const baseurl = "https://open-ic.epic.com/FHIR/api/FHIR/DSTU2/"
 
 const pid = "4342009"
-const baseurl = "https://fhir-open.cerner.com/dstu2/ec2458f2-1e24-41c8-b71b-0e701af7583d/"
+const baseurl = "https://fhir-open.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d/"
 
 func TestQuery(t *testing.T) {
-	fmt.Printf("Test rin a FHIR query")
+	fmt.Printf("Test run a FHIR query")
 	c := New(baseurl)
 	Convey("Run a query", t, func() {
 		data, err := c.Query("Patient/12724066")
@@ -144,6 +144,21 @@ func TestGetDocumentImage(t *testing.T) {
 		})
 	})
 }
+
+func TestPatientDocumentReference(t *testing.T) {
+	c := New(baseurl)
+	Convey("Get GetpatientDocumentReference", t, func() {
+		//https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/DiagnosticReport?patient=1316020&_count=10
+		data, err := c.GetPatientDiagnosticReports("12724066")
+		So(err, ShouldBeNil)
+		So(data, ShouldNotBeNil)
+		fmt.Printf("Document: %s\n", spew.Sdump(data))
+	})
+
+	//data, err := c.GetDocumentReference(pid)
+
+}
+
 func TestPatientDiagnosticReports(t *testing.T) {
 	c := New(baseurl)
 	Convey("Get GetpatientDiagnosticReoprts", t, func() {
@@ -178,7 +193,7 @@ func TestPatientDiagnosticReport(t *testing.T) {
 
 func TestDocument(t *testing.T) {
 	c := New(baseurl)
-	data, err := c.GetDocumentReference(pid)
+	data, err := c.GetDocumentReference("12724066")
 	if err != nil {
 		t.Fatal(err)
 	}
