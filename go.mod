@@ -10,6 +10,7 @@ require (
 )
 
 require (
+	github.com/dhf0820/fhirR2go v0.0.0-20220630005941-2d09629d82d3 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1 // indirect
 	github.com/jtolds/gls v4.20.0+incompatible // indirect

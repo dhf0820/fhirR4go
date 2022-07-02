@@ -3,7 +3,7 @@ package fhirR4go
 import (
 	"encoding/json"
 	"fmt"
-
+	fhir2 "github.com/dhf0820/fhirR2go"
 	//"time"
 	"github.com/davecgh/go-spew/spew"
 	log "github.com/sirupsen/logrus"
@@ -225,7 +225,7 @@ type DocumentBundle struct {
 	Meta         *Meta                 `bson:"meta,omitempty" json:"meta,omitempty"`
 	Type         Code                  `bson:"type" json:"type"` // document | message | transaton | transaction-response | batch | batch_response | history | searchset | collection
 	Total        int                   `bson:"total,omitempty" json:"total,omitempty"`
-	Link         []BundleLink          `bson:"link,omitempty" json:"link,omitempty"`
+	Link         []fhir2.BundleLink    `bson:"link,omitempty" json:"link,omitempty"`
 	Entry        []DocumentBundleEntry `bson:"entry,omitempty" json:"entry,omitempty"`
 	//Signature     *Signature    `bson:"signature,omitempty" json:"signature,omitempty"`
 }
