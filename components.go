@@ -393,9 +393,9 @@ type Reason struct {
 }
 
 type Reference struct {
-	Ref        string      `json:"reference"`
-	Identifier *Identifier `json:"identifier,omitempty"` // R4
-	Display    *string     `json:"display,omitempty"`
+	Ref        string     `json:"reference"`
+	Identifier Identifier `json:"identifier,omitempty"` // R4
+	Display    string     `json:"display,omitempty"`
 }
 
 // Repeat is a time based repeat of something
