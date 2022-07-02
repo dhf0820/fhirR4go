@@ -123,15 +123,15 @@ type ReferenceResults struct {
 // Use DocumentReferences for a bundle.
 type DocumentReference struct {
 	DomainResource   `bson:",inline"`
-	MasterIdentifier *Identifier                           `bson:"masterIdentifier,omitempty" json:"masterIdentifier,omitempty"` //Version Specific
+	MasterIdentifier Identifier                            `bson:"masterIdentifier,omitempty" json:"masterIdentifier,omitempty"` //Version Specific
 	Identifier       []Identifier                          `bson:"identifier,omitempty" json:"identifier,omitempty"`
 	Text             *TextData                             `bson:"text" json:"text"`
-	Subject          *Reference                            `json:"subject" bson:"subject"`
-	Type             *CodeableConcept                      `json:"type" bson:"type"`
-	Class            *CodeableConcept                      `json:"class" bson:"class"`
+	Subject          Reference                             `json:"subject" bson:"subject"`
+	Type             CodeableConcept                       `json:"type" bson:"type"`
+	Class            CodeableConcept                       `json:"class" bson:"class"`
 	Author           []Reference                           `json:"author" bson:"author"`
-	Custodian        *Reference                            `json:"custodian" bson:"custodian"`
-	Authenticator    *Reference                            `json:"authenticator" bsn:"authenticator"`
+	Custodian        Reference                             `json:"custodian" bson:"custodian"`
+	Authenticator    Reference                             `json:"authenticator" bsn:"authenticator"`
 	Created          *FHIRDateTime                         `json:"created" bson:"created"`
 	Indexed          *FHIRDateTime                         `json:"indexed" bson:"indexed"`
 	Status           Code                                  `json:"status" bson:"status"`
