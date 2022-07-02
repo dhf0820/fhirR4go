@@ -1,16 +1,17 @@
-package fhirongo
+package fhirR4go
 
 import (
 	//log "github.com/sirupsen/logrus"
 	//. "github.com/smartystreets/goconvey/convey"
 
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
-	log "github.com/sirupsen/logrus"
-	. "github.com/smartystreets/goconvey/convey"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/davecgh/go-spew/spew"
+	log "github.com/sirupsen/logrus"
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 //const pid = "Tbt3KuCY0B5PSrJvCu2j-PlK.aiHsu2xUjUM8bWpetXoB"

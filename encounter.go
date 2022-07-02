@@ -1,14 +1,14 @@
-package fhirongo
+package fhirR4go
 
 import (
 	"encoding/json"
 	"fmt"
 	"time"
+
 	//"strings"
 	//"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	log "github.com/sirupsen/logrus"
-
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // GetEncounter will return an Encounter for a number (Encounter)
@@ -40,7 +40,6 @@ func (c *Connection) NextFhirEncounters(url string) (*EncounterResults, error) {
 	}
 	return &data, nil
 }
-
 
 // GetEncounter will return Encounters for a patient with id pid
 func (c *Connection) GetPatientEncounters(pid string) (*EncounterResults, error) {
@@ -84,46 +83,45 @@ func (c *Connection) FindFhirEncounters(query string) (*EncounterResults, error)
 type EncounterResults struct {
 	SearchResult
 	Entry []struct {
-		FullUrl		string		`json:"full_url"`
+		FullUrl string `json:"full_url"`
 		//EntryPartial
-		Encounter				`json:"resource"`
-	} 		`json:"entry"`
+		Encounter `json:"resource"`
+	} `json:"entry"`
 }
 
-
 type PrelimEncounter struct {
-	CacheID 			primitive.ObjectID 	`json:"-" bson:"_id"`
-	SessionId			string 				`json:"-" bson:"session_id"`
-	ResourceType      	string       		`json:"resourceType" bson:"resource_type"`
-	ID               	string       		`json:"id" bson:"id"`
-	EffectiveDateTime 	time.Time    		`json:"effectiveDateTime" bson:"effective_date_time"`
-	RecordedDate      	time.Time    		`json:"recordedDate" bson:"recorded_date"`
+	CacheID           primitive.ObjectID `json:"-" bson:"_id"`
+	SessionId         string             `json:"-" bson:"session_id"`
+	ResourceType      string             `json:"resourceType" bson:"resource_type"`
+	ID                string             `json:"id" bson:"id"`
+	EffectiveDateTime time.Time          `json:"effectiveDateTime" bson:"effective_date_time"`
+	RecordedDate      time.Time          `json:"recordedDate" bson:"recorded_date"`
 
-	Meta 				MetaData			`json:"meta" bson:"meta"`
-	Text              	TextData     		`json:"text" bson:"text"`
-	Identifiers       	[]Identifier 		`json:"identifier" bson:"identifier"`
-	Status            	string       		`json:"status" bson:"status"`
-	Class             	string       		`json:"class" bson:"class"`
-	Type              	[]Concept    		`json:"type" bson:"type"`
-	Priority			*CodeableConcept			`json:"priority"`
-	Subject           	Person       		`json:"subject" bson:"subject"`
-	Patient           	Person       		`json:"patient" bson:"patient"`
-	Performer         	Person       		`json:"performer" bson:"performer"`
-	Recorder          	Person       		`json:"recorder" bson:"recorder"`
-	Code              	Code         		`json:"code" bson:"code"`
-	Category          	Code         		`json:"category" bson:"category"`
-	Reasons           	[]*Reason    		`json:"reason" bson:"reason"`
-	Description       	string       		`json:"description" bson:"description"`
-	Participant    		[]EncounterParticipant	`json:"participant,omitempty" bson:"participant,omitempty"`
-//		Participant     	[]BackboneElement
-	Period				Period		   		`json:"period" bson:"period"`
-	Location        	[]Location			`json:"location" bson:"location"`
-	ServiceProvider 	ServiceProvider		`json:"service_provider" bson:"service_provider"`
+	Meta        MetaData               `json:"meta" bson:"meta"`
+	Text        TextData               `json:"text" bson:"text"`
+	Identifiers []Identifier           `json:"identifier" bson:"identifier"`
+	Status      string                 `json:"status" bson:"status"`
+	Class       string                 `json:"class" bson:"class"`
+	Type        []Concept              `json:"type" bson:"type"`
+	Priority    *CodeableConcept       `json:"priority"`
+	Subject     Person                 `json:"subject" bson:"subject"`
+	Patient     Person                 `json:"patient" bson:"patient"`
+	Performer   Person                 `json:"performer" bson:"performer"`
+	Recorder    Person                 `json:"recorder" bson:"recorder"`
+	Code        Code                   `json:"code" bson:"code"`
+	Category    Code                   `json:"category" bson:"category"`
+	Reasons     []*Reason              `json:"reason" bson:"reason"`
+	Description string                 `json:"description" bson:"description"`
+	Participant []EncounterParticipant `json:"participant,omitempty" bson:"participant,omitempty"`
+	//		Participant     	[]BackboneElement
+	Period          Period          `json:"period" bson:"period"`
+	Location        []Location      `json:"location" bson:"location"`
+	ServiceProvider ServiceProvider `json:"service_provider" bson:"service_provider"`
 }
 
 type Encounter struct {
-	CacheID 		  primitive.ObjectID 		`bson:"_id" json:"-"`
-	SessionId		  string 					`bson:"session_id" json:"-"`
+	CacheID           primitive.ObjectID        `bson:"_id" json:"-"`
+	SessionId         string                    `bson:"session_id" json:"-"`
 	Id                *string                   `bson:"id,omitempty" json:"id,omitempty"`
 	Meta              *Meta                     `bson:"meta,omitempty" json:"meta,omitempty"`
 	Identifier        []Identifier              `bson:"identifier,omitempty" json:"identifier,omitempty"`
@@ -132,25 +130,25 @@ type Encounter struct {
 	Class             string                    `bson:"class" json:"class"`
 	Type              []CodeableConcept         `bson:"type,omitempty" json:"type,omitempty"`
 	Priority          *CodeableConcept          `bson:"priority,omitempty" json:"priority,omitempty"`
-	Patient           Person	                `bson:"patient,omitempty" json:"patient,omitempty"`
+	Patient           Person                    `bson:"patient,omitempty" json:"patient,omitempty"`
 	EpisodeOfCare     []Reference               `bson:"episodeOfCare,omitempty" json:"episodeOfCare,omitempty"`
-	IncommingReferral []Reference 				`bson:"incomingReferral,omitempty" json:"incommingReferral,omitempty"`
+	IncommingReferral []Reference               `bson:"incomingReferral,omitempty" json:"incommingReferral,omitempty"`
 	Participant       []EncounterParticipant    `bson:"participant,omitempty" json:"participant,omitempty"`
 	Appointment       []Reference               `bson:"appointment,omitempty" json:"appointment,omitempty"`
 	Period            *Period                   `bson:"period,omitempty" json:"period,omitempty"`
 	Length            *Duration                 `bson:"length,omitempty" json:"length,omitempty"`
-	Reason 	          []CodeableConcept         `bson:"reason,omitempty" json:"reason,omitempty"`
-	Indication		  []Reference 				`bson:"indication,omitempty" json:"indication"`
+	Reason            []CodeableConcept         `bson:"reason,omitempty" json:"reason,omitempty"`
+	Indication        []Reference               `bson:"indication,omitempty" json:"indication"`
 	Hospitalization   *EncounterHospitalization `bson:"hospitalization,omitempty" json:"hospitalization,omitempty"`
 	Location          []EncounterLocation       `bson:"location,omitempty" json:"location,omitempty"`
 	ServiceProvider   *Reference                `bson:"serviceProvider,omitempty" json:"serviceProvider,omitempty"`
 	PartOf            *Reference                `bson:"partOf,omitempty" json:"partOf,omitempty"`
-//Not part of DSTU2 Cerner
-	Text              *Narrative                `bson:"text,omitempty" json:"text,omitempty"`
-	Subject           Person	                `bson:"subject,omitempty" json:"subject,omitempty"`
-	CreatedAt 		  *time.Time 				`bson:"created_at"`
+	//Not part of DSTU2 Cerner
+	Text      *Narrative `bson:"text,omitempty" json:"text,omitempty"`
+	Subject   Person     `bson:"subject,omitempty" json:"subject,omitempty"`
+	CreatedAt *time.Time `bson:"created_at"`
 
-// Not in Cerner or 4
+	// Not in Cerner or 4
 	// Extension         []Extension               `bson:"extension,omitempty" json:"extension,omitempty"`
 	// ModifierExtension []Extension               `bson:"modifierExtension,omitempty" json:"modifierExtension,omitempty"`
 	// Subject           Person	                `bson:"subject,omitempty" json:"subject,omitempty"`
@@ -163,15 +161,15 @@ type Encounter struct {
 	// ReasonReference   []Reference               `bson:"reasonReference,omitempty" json:"reasonReference,omitempty"`
 	// Diagnosis         []EncounterDiagnosis      `bson:"diagnosis,omitempty" json:"diagnosis,omitempty"`
 	// Account           []Reference               `bson:"account,omitempty" json:"account,omitempty"`
-	
+
 }
 
 type EncounterStatusHistory struct {
-	Id                *string         `bson:"id,omitempty" json:"id,omitempty"`
-	Extension         []Extension     `bson:"extension,omitempty" json:"extension,omitempty"`
-	ModifierExtension []Extension     `bson:"modifierExtension,omitempty" json:"modifierExtension,omitempty"`
-	Status            string `bson:"status" json:"status"`
-	Period            Period          `bson:"period" json:"period"`
+	Id                *string     `bson:"id,omitempty" json:"id,omitempty"`
+	Extension         []Extension `bson:"extension,omitempty" json:"extension,omitempty"`
+	ModifierExtension []Extension `bson:"modifierExtension,omitempty" json:"modifierExtension,omitempty"`
+	Status            string      `bson:"status" json:"status"`
+	Period            Period      `bson:"period" json:"period"`
 }
 type EncounterClassHistory struct {
 	Id                *string     `bson:"id,omitempty" json:"id,omitempty"`
@@ -211,21 +209,20 @@ type EncounterHospitalization struct {
 	DischargeDisposition   *CodeableConcept  `bson:"dischargeDisposition,omitempty" json:"dischargeDisposition,omitempty"`
 }
 type EncounterLocation struct {
-	Id                *string                  `bson:"id,omitempty" json:"id,omitempty"`
-	Extension         []Extension              `bson:"extension,omitempty" json:"extension,omitempty"`
-	ModifierExtension []Extension              `bson:"modifierExtension,omitempty" json:"modifierExtension,omitempty"`
-	Location          Reference                `bson:"location" json:"location"`
-	Status            EncounterLocationStatus  `bson:"status,omitempty" json:"status,omitempty"`
-	PhysicalType      *CodeableConcept         `bson:"physicalType,omitempty" json:"physicalType,omitempty"`
-	Period            *Period                  `bson:"period,omitempty" json:"period,omitempty"`
+	Id                *string                 `bson:"id,omitempty" json:"id,omitempty"`
+	Extension         []Extension             `bson:"extension,omitempty" json:"extension,omitempty"`
+	ModifierExtension []Extension             `bson:"modifierExtension,omitempty" json:"modifierExtension,omitempty"`
+	Location          Reference               `bson:"location" json:"location"`
+	Status            EncounterLocationStatus `bson:"status,omitempty" json:"status,omitempty"`
+	PhysicalType      *CodeableConcept        `bson:"physicalType,omitempty" json:"physicalType,omitempty"`
+	Period            *Period                 `bson:"period,omitempty" json:"period,omitempty"`
 }
 
-type EncounterLocationStatus string 
+type EncounterLocationStatus string
 
 type OtherEncounter Encounter
 
 type EncounterStatus string
-
 
 type Duration struct {
 	Id         *string             `bson:"id,omitempty" json:"id,omitempty"`
@@ -236,7 +233,6 @@ type Duration struct {
 	System     *string             `bson:"system,omitempty" json:"system,omitempty"`
 	Code       *string             `bson:"code,omitempty" json:"code,omitempty"`
 }
-
 
 // type EncounterLocationStatus int
 
@@ -309,8 +305,6 @@ type Duration struct {
 // 	return "<unknown>"
 // }
 
-
-
 type Meta struct {
 	Id          *string     `bson:"id,omitempty" json:"id,omitempty"`
 	Extension   []Extension `bson:"extension,omitempty" json:"extension,omitempty"`
@@ -321,8 +315,3 @@ type Meta struct {
 	Security    []Coding    `bson:"security,omitempty" json:"security,omitempty"`
 	Tag         []Coding    `bson:"tag,omitempty" json:"tag,omitempty"`
 }
-
-
-
-
-

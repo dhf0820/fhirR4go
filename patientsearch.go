@@ -1,4 +1,4 @@
-package fhirongo
+package fhirR4go
 
 import (
 	"encoding/json"
@@ -28,7 +28,7 @@ func (c *Connection) PatientSearch(query string) (*PatientResult, error) {
 
 		return nil, fmt.Errorf("Query %s failed: %s", query, err.Error())
 	}
-	
+
 	//fmt.Printf("\n\n\n@@@ RAW Patient: %s\n\n\n", pretty.Pretty(b))
 	// prettyJSON, err := json.MarshalIndent(b, "", "    ")
 	// if err != nil {

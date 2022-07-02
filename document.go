@@ -1,8 +1,9 @@
-package fhirongo
+package fhirR4go
 
 import (
 	"encoding/json"
 	"fmt"
+
 	//"time"
 	"github.com/davecgh/go-spew/spew"
 	log "github.com/sirupsen/logrus"
@@ -125,7 +126,7 @@ type DocumentReference struct {
 	MasterIdentifier *Identifier                           `bson:"masterIdentifier,omitempty" json:"masterIdentifier,omitempty"` //Version Specific
 	Identifier       []Identifier                          `bson:"identifier,omitempty" json:"identifier,omitempty"`
 	Text             *TextData                             `bson:"text" json:"text"`
-	Subject          *Person                               `json:"subject" bson:"subject"`
+	Subject          *Reference                            `json:"subject" bson:"subject"`
 	Type             *CodeableConcept                      `json:"type" bson:"type"`
 	Class            *CodeableConcept                      `json:"class" bson:"class"`
 	Author           []Reference                           `json:"author" bson:"author"`
@@ -133,8 +134,8 @@ type DocumentReference struct {
 	Authenticator    *Reference                            `json:"authenticator" bsn:"authenticator"`
 	Created          *FHIRDateTime                         `json:"created" bson:"created"`
 	Indexed          *FHIRDateTime                         `json:"indexed" bson:"indexed"`
-	Status           *Code                                 `json:"status" bson:"status"`
-	DocStatus        *Code                                 `json:"docStatus" bson:"doc_status"` //
+	Status           Code                                  `json:"status" bson:"status"`
+	DocStatus        Code                                  `json:"docStatus" bson:"doc_status"` //
 	RelatesTo        []DocumentReferenceRelatesToComponent `bson:"relatesTo,omitempty" json:"relatesTo,omitempty"`
 	Description      string                                `json:"description" bson:"description"`
 	SecurityLabel    []CodeableConcept                     `bson:"securityLabel,omitempty" json:"securityLabel,omitempty"`

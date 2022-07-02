@@ -1,4 +1,4 @@
-package fhirongo
+package fhirR4go
 
 import "encoding/json"
 

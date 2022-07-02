@@ -1,4 +1,4 @@
-package fhirongo
+package fhirR4go
 
 type Resource struct {
 	ResourceType string `bson:"resourceType,omitempty" json:"resourceType,omitempty"`

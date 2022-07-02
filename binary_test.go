@@ -1,4 +1,4 @@
-package fhirongo
+package fhirR4go
 
 import (
 	//log "github.com/sirupsen/logrus"
@@ -20,7 +20,7 @@ import (
 func TestGetImage(t *testing.T) {
 	fmt.Printf("Get a PDF image\n")
 	c := New(baseurl)
-	Convey("Request the PDF image by documentId", t, func(){
+	Convey("Request the PDF image by documentId", t, func() {
 		image, err := c.GetImage("197198634")
 		So(err, ShouldBeNil)
 		So(image, ShouldNotBeNil)
@@ -31,7 +31,7 @@ func TestGetImage(t *testing.T) {
 func TestGetPDF(t *testing.T) {
 	fmt.Printf("Get a PDF image\n")
 	c := New(baseurl)
-	Convey("Request the PDF image by documentId", t, func(){
+	Convey("Request the PDF image by documentId", t, func() {
 		image, err := c.GetPDF("197466431")
 		So(err, ShouldBeNil)
 		So(image, ShouldNotBeNil)
@@ -41,11 +41,11 @@ func TestGetPDF(t *testing.T) {
 func TestGetPDFb64(t *testing.T) {
 	fmt.Printf("Get a PDF image\n")
 	c := New(baseurl)
-	Convey("Request the PDF image by documentId", t, func(){
+	Convey("Request the PDF image by documentId", t, func() {
 		docId := "197369077"
 		image, err := c.GetPDFb64(docId)
 		So(err, ShouldBeNil)
 		So(image, ShouldNotBeNil)
-		Decode(docId+".pdf", image )
+		Decode(docId+".pdf", image)
 	})
 }

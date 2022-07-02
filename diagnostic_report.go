@@ -1,4 +1,4 @@
-package fhirongo
+package fhirR4go
 
 import (
 	"encoding/json"
@@ -12,9 +12,8 @@ import (
 	"time"
 )
 
-
 func (c *Connection) GetDiagnosticPDF(url string) ([]byte, error) {
-	bytes, err := c.GetFhir(url )
+	bytes, err := c.GetFhir(url)
 	if err != nil {
 		return nil, fmt.Errorf("error getting a single diagnistic document: %s", err.Error())
 	}
@@ -24,7 +23,6 @@ func (c *Connection) GetDiagnosticPDF(url string) ([]byte, error) {
 	fmt.Printf("Wrote the pdf file\n")
 	return bytes, nil
 }
-	
 
 // GetDiagnosticReport will return a diagnostic report for a patient with id pid
 func (c *Connection) FindDiagnosticReports(query string) (*DocumentResults, error) {
@@ -52,7 +50,7 @@ func (c *Connection) FindDiagnosticReports(query string) (*DocumentResults, erro
 func (c *Connection) GetDiagnosticReports(qry string) (*DocumentResults, error) {
 	//res, err := c.Query(fmt.Sprintf("DiagnosticReport?patient=%v", pid))
 
-//bytes, err := c.Query("https://fhir-open.cerner.com/dstu2/ec2458f2-1e24-41c8-b71b-0e701af7583d/DiagnosticReport?patient=12724066")
+	//bytes, err := c.Query("https://fhir-open.cerner.com/dstu2/ec2458f2-1e24-41c8-b71b-0e701af7583d/DiagnosticReport?patient=12724066")
 	bytes, err := c.Query(fmt.Sprintf("DiagnosticReport%s", qry))
 	//fmt.Printf("GetDiag error: %v\n", err)
 	if err != nil {
@@ -62,14 +60,13 @@ func (c *Connection) GetDiagnosticReports(qry string) (*DocumentResults, error) 
 	// fmt.Printf("\n\n\n@@@ RAW DiagnosticReport: %s\n\n\n", pretty.Pretty(b))
 	// spew.Dump(b)
 
-
 	data := DocumentResults{}
 	if err := json.Unmarshal(bytes, &data); err != nil {
 		log.Infof("unmarshal:56 error: %s\n", err.Error())
 		return nil, err
 	}
-	if len(data.Link) > 1 {  // There are additional pages.
-			fmt.Printf("there are more pages\n")
+	if len(data.Link) > 1 { // There are additional pages.
+		fmt.Printf("there are more pages\n")
 	}
 	//fmt.Printf("results: %s\n", spew.Sdump(data))
 	return &data, nil
@@ -81,8 +78,6 @@ func (c *Connection) GetPatientDiagnosticReports(pid string) (*DocumentResults, 
 	return c.GetDiagnosticReports(qry)
 
 }
-
-
 
 func (c *Connection) NextFhirDiagRepts(url string) (*DocumentResults, error) {
 	//fmt.Printf("Next retrieving : %s\n", url)
@@ -102,13 +97,12 @@ func (c *Connection) NextFhirDiagRepts(url string) (*DocumentResults, error) {
 
 // DiagnosticReport is a FHIR report
 
-
 type DiagnosticReport struct {
-	CacheID 		  primitive.ObjectID `json:"cach_id" bson:"_id,omitempty"`
+	CacheID           primitive.ObjectID `json:"cach_id" bson:"_id,omitempty"`
 	ResourceType      string             `json:"resourceType" bson:"resource_type"`
-	SessionId	  	  string   			 `json:"-" bson:"sessionid"`
+	SessionId         string             `json:"-" bson:"sessionid"`
 	ID                string             `json:"id"`
-	FullURL			  string 			 `json:"fullUrl" bson:"full_url"`
+	FullURL           string             `json:"fullUrl" bson:"full_url"`
 	EffectiveDateTime time.Time          `json:"effectiveDateTime" bson:"effectiive_datetime"`
 	Meta              MetaData           `json:"meta" bson:"meta"`
 	Text              TextData           `json:"text" bson:"text"`
@@ -122,8 +116,7 @@ type DiagnosticReport struct {
 	PresentedForm     []Attachment       `json:"presentedForm" bson:"presented_form"`
 	Request           []Thing            `json:"request" bson:"request"`
 	Result            []Thing            `json:"result" bson:"result"`
-} 
-
+}
 
 // type DocumentResponse struct {
 // 	//Bundle Bundle
@@ -142,7 +135,6 @@ type DiagnosticReport struct {
 // 		//DiagnosticReport  `json:"resource"`
 // 	} `json:"entry"`
 // }
-
 
 // type ResourcePartial struct {
 // 	ResourceType      string             `json:"resourceType"`
