@@ -421,8 +421,8 @@ type ResourcePartial struct {
 }
 
 type SearchEntryMode struct {
-	Code    string `bson:"code" json:"code"`
-	Display string `bson:"display" jsom:"display"`
+	Code    string `bson:"code" json:"code, omitempty"`
+	Display string `bson:"display" json:"display"`
 }
 
 // SearchMode is a FHIR search mode
@@ -437,7 +437,7 @@ type SearchRequest struct {
 	IfNoneMatch     string  `bson:"if_none_match" json:"ifNoneMatch"`
 	IfModifiedSince Instant `bson:"if_modified_since" json:"ifModifiedSince"`
 	IfMatch         string  `bson:"if_match" json:"ifMatch"`
-	IfNoneExist     string  `bson:"if_none_exist" json:"ifNoneExist`
+	IfNoneExist     string  `bson:"if_none_exist" json:"ifNoneExist"`
 }
 
 // SearchResult is a search result
