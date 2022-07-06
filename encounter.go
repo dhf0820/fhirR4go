@@ -317,13 +317,13 @@ type Meta struct {
 }
 
 type EncounterBundle struct {
-	ResourceType string                `bson:"resource_type" json:"resourceType"`
-	Id           string                `bson:"id,omitempty" json:"id,omitempty"`
-	Meta         *Meta                 `bson:"meta,omitempty" json:"meta,omitempty"`
-	Type         Code                  `bson:"type" json:"type"` // document | message | transaton | transaction-response | batch | batch_response | history | searchset | collection
-	Total        int                   `bson:"total,omitempty" json:"total,omitempty"`
-	Link         []BundleLink          `bson:"link,omitempty" json:"link,omitempty"`
-	Entry        []DocumentBundleEntry `bson:"entry,omitempty" json:"entry,omitempty"`
+	ResourceType string                 `bson:"resource_type" json:"resourceType"`
+	Id           string                 `bson:"id,omitempty" json:"id,omitempty"`
+	Meta         *Meta                  `bson:"meta,omitempty" json:"meta,omitempty"`
+	Type         Code                   `bson:"type" json:"type"` // document | message | transaton | transaction-response | batch | batch_response | history | searchset | collection
+	Total        int                    `bson:"total,omitempty" json:"total,omitempty"`
+	Link         []BundleLink           `bson:"link,omitempty" json:"link,omitempty"`
+	Entry        []EncounterBundleEntry `bson:"entry,omitempty" json:"entry,omitempty"`
 	//Signature     *Signature    `bson:"signature,omitempty" json:"signature,omitempty"`
 }
 
@@ -333,7 +333,7 @@ type EncounterBundleEntry struct {
 	// ModifierExtension []Extension          `bson:"modifierExtension,omitempty" json:"modifierExtension,omitempty"`
 	Link     []BundleLink         `bson:"link,omitempty" json:"link,omitempty"`
 	FullUrl  string               `bson:"fullUrl,omitempty" json:"fullUrl,omitempty"`
-	Resource DocumentReference    `bson:"resource,omitempty" json:"resource,omitempty"` //Document, patient, encounter. Diagnosticreport
+	Resource Encounter            `bson:"resource,omitempty" json:"resource,omitempty"` //Document, patient, encounter. Diagnosticreport
 	Search   *BundleEntrySearch   `bson:"search,omitempty" json:"search,omitempty"`
 	Request  *BundleEntryRequest  `bson:"request,omitempty" json:"request,omitempty"`
 	Response *BundleEntryResponse `bson:"response,omitempty" json:"response,omitempty"`
