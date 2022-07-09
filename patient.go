@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	//"go.mongodb.org/mongo-driver/bson/primitive"
 
 	//"github.com/tidwall/pretty"
 	//"github.com/davecgh/go-spew/spew"
@@ -98,25 +98,28 @@ func (c *Connection) NextFhirPatients(url string) (*PatientResult, error) {
 
 // Patient is a FHIR patient
 type Patient struct {
-	CacheID         primitive.ObjectID `json:"-" bson:"_id"`
-	SessionId       string             `json:"-" bson:"sessiopn_id"`
-	ResourceType    string             `json:"resourceType" bson:"resource_type"`
-	ID              string             `json:"id" bson:"id"`
-	Meta            MetaData           `json:"meta" bson:"meta"`
-	Text            TextData           `json:"text" bson:"text"`
-	Identifier      []Identifier       `json:"identifier" bson:"identifier"`
-	Active          bool               `json:"active" bson:"active"`
-	BirthDate       string             `json:"birthDate" bson:"birth_date"`
-	Gender          string             `json:"gender" bson:"gender"`
-	DeceasedBoolean bool               `json:"deceasedBoolean" bson:"deceased"`
-	CareProvider    []Person           `json:"careProvider" bson:"care_provider"`
-	Name            []HumanName        `json:"name" bson:"name"`
-	Address         []Address          `json:"address" bson:"address"`
-	Telecom         []Telecom          `json:"telecom" bson:"telecom"`
-	MaritalStatus   Concept            `json:"maritalStatus" bson:"marital_status"`
-	Communication   []Communication    `json:"communication" bson:"communication"`
-	Extension       []Extension        `json:"extension" bson:"extension"`
-	LastAccess      time.Time          `json:"-" bson:"last_access"`
+	ResourceType        string                `json:"resourceType" bson:"resource_type"`
+	FhirID              string                `json:"id"`
+	ID                  string                `json:"-" bson:"_id"`
+	Meta                MetaData              `json:"meta" bson:"meta"`
+	Text                TextData              `json:"text" bson:"text"`
+	Identifier          []Identifier          `json:"identifier" bson:"identifier"`
+	Active              bool                  `json:"active" bson:"active"`
+	Name                []HumanName           `json:"name" bson:"name"`
+	Telecom             []Telecom             `json:"telecom" bson:"telecom"`
+	Gender              string                `json:"gender" bson:"gender"`
+	BirthDate           string                `json:"birthDate" bson:"birth_date"`
+	Address             []Address             `json:"address" bson:"address"`
+	DeceasedBoolean     bool                  `json:"deceasedBoolean" bson:"deceased"`
+	CareProvider        []Person              `json:"careProvider" bson:"care_provider"`
+	MaritalStatus       MaritalStatus         `json:"maritalStatus" bson:"marital_status"`
+	Communication       []Communication       `json:"communication" bson:"communication"`
+	LastAccess          time.Time             `json:"-" bson:"last_access"`
+	GeneralPractitioner []GeneralPractitioner `json:"generalPractitioner" bson:"general_practitioner"`
+	Extension           []Extension           `json:"extension" bson:"extension"`
+}
+
+type CachePatient struct {
 }
 
 // type PatientBundle struct {

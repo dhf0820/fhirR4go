@@ -3,8 +3,14 @@ package fhirR4go
 import (
 	"time"
 	//"go.mongodb.org/mongo-driver/bson"
-	//"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
+
+type CacheHeader struct {
+	Id     primitive.ObjectID `bson:"_id" json:"id"`         //This cache entry
+	UserId string             `bson:"user_id" json:"userId"` //Global userId in ChartArchive
+	PageId int                `bson:"page_id" json:"pageId"` //Part of this pages cache
+}
 
 // Address is a physical address
 type Address struct {
@@ -216,15 +222,21 @@ type Extension struct {
 // 	DischargeDisposition   *CodeableConcept  `bson:"dischargeDisposition,omitempty" json:"dischargeDisposition,omitempty"`
 // }
 
+type GeneralPractitioner struct {
+	ID        string `json:"id" bson:"id"`
+	Reference string `json:"reference" bson:"reference"`
+	Display   string `json:"display" bson:"display"`
+}
+
 //HumanName is a persons name
 type HumanName struct {
-	Use    string   `json:"use"`
-	Text   []string `json:"text"`
-	Family []string `json:"family"`
-	Given  []string `json:"given"`
-	Suffix []string `json:"suffix"`
-	Prefix []string `json:"prefix"`
-	Period Period   `json:"period"`
+	Use    string   `json:"use" bson:"use"`
+	Text   []string `json:"text" bson:"text"`
+	Family []string `json:"family" bson:"family"`
+	Given  []string `json:"given" bson:"given"`
+	Suffix []string `json:"suffix" bson:"sufix"`
+	Prefix []string `json:"prefix" bson:"prefix"`
+	Period Period   `json:"period" bson:"period"`
 }
 
 // Identifier can identify things
@@ -318,6 +330,11 @@ type LocationHoursOfOperation struct {
 	ClosingTime       *string      `bson:"closingTime,omitempty" json:"closingTime,omitempty"`
 }
 type OtherLocation Location
+
+type MaritalStatus struct {
+	Coding []Coding `bson:"coding" json:"maritalStatus"`
+	Text   string   `bson:"text" json:"text"`
+}
 
 //MetaData meta field in DocumentReference/DiagnosticReport
 type MetaData struct {
@@ -456,6 +473,11 @@ type ServiceProvider struct {
 }
 
 type Status string
+
+type Text struct {
+	Status string `json:"status"`
+	Div    string `json:"div"`
+}
 
 //TextData is the html text
 type TextData struct {
