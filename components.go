@@ -7,9 +7,10 @@ import (
 )
 
 type CacheHeader struct {
-	Id     primitive.ObjectID `bson:"_id" json:"id"`         //This cache entry
-	UserId string             `bson:"user_id" json:"userId"` //Global userId in ChartArchive
-	PageId int                `bson:"page_id" json:"pageId"` //Part of this pages cache
+	Id        primitive.ObjectID `bson:"_id" json:"id"`               //This cache entry
+	UserId    string             `bson:"user_id" json:"userId"`       //Global userId in ChartArchive
+	PageId    int                `bson:"page_id" json:"pageId"`       //Part of this pages cache
+	CreatedAt *time.Time         `bson:"created_at" json:"createdAt"` //When was this cache created
 }
 
 // Address is a physical address
